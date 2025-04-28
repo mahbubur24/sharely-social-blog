@@ -1,6 +1,7 @@
 import cors from "cors";
 import express, { Request, Response } from "express";
 import morgan from "morgan";
+import router from "./routes";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(router);
 
 app.use(/(.*)/, (req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
