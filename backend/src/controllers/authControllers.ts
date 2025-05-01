@@ -63,3 +63,41 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     data: response.data,
   });
 });
+
+export const updateUser = asyncHandler(async (req: Request, res: Response) => {
+  const { name, email, password } = req.body;
+
+  // Find the existing user by email
+  const existingUser = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!existingUser) {
+    throw new ApiError(401, "User not found");
+  }
+
+  // Prepare update data
+  const updateData: any = {};
+  if (name) updateData.name = name;
+  if (password) updateData.password = password;
+
+  // Update user details
+  const updatedUser = await prisma.user.update({
+    where: { email },
+    data: updateData,
+  });
+
+  // Prepare response
+  const response = new ApiResponse(
+    200,
+    updatedUser,
+    "User updated successfully"
+  );
+
+  // Send the response
+  res.status(response.statusCode).json({
+    success: response.success,
+    message: response.message,
+    data: response.data,
+  });
+});
