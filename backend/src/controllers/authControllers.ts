@@ -101,3 +101,31 @@ export const updateUser = asyncHandler(async (req: Request, res: Response) => {
     data: response.data,
   });
 });
+
+export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  // Find the existing user by email
+  const existingUser = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!existingUser) {
+    throw new ApiError(401, "User not found");
+  }
+
+  // Delete user
+  await prisma.user.delete({
+    where: { email },
+  });
+
+  // Prepare response
+  const response = new ApiResponse(200, null, "User deleted successfully");
+
+  // Send the response
+  res.status(response.statusCode).json({
+    success: response.success,
+    message: response.message,
+    data: response.data,
+  });
+});
