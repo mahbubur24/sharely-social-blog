@@ -2,7 +2,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Button from "../shared/ButtonProps";
+
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -23,6 +24,8 @@ export default function NewsletterSubscribe() {
       email: "",
     },
   });
+
+  const { isSubmitting } = form.formState;
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     console.log({ data });
@@ -70,7 +73,7 @@ export default function NewsletterSubscribe() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="">
+          <Button type="submit" disabled={isSubmitting}>
             Subscribe
           </Button>
         </form>
