@@ -4,7 +4,7 @@ import SectionTitle from "../shared/SectionTitle";
 import NewsletterSubscribe from "./SubscribeCard";
 import TopStoriesArticle from "./TopStoriesArticle";
 
-function TopStories() {
+export default function TopStories() {
   return (
     <div className="px-10 pb-10 w-full">
       <div className="flex w-full mb-10 items-center">
@@ -34,5 +34,3 @@ function TopStories() {
     </div>
   );
 }
-
-export default TopStories;
