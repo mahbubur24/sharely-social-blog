@@ -57,7 +57,7 @@ export default function NewsletterSubscribe() {
                   <Textarea
                     placeholder="Type here.."
                     className="
-                    min-h-[150px]
+                    h-auto bg-white
                     border border-gray-300 
                     rounded-none 
                     outline-none 
