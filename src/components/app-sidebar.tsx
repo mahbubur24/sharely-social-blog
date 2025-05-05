@@ -54,7 +54,7 @@ const data = {
       items: [
         {
           title: "All Posts",
-          url: "#",
+          url: "/all-posts",
         },
         {
           title: "Create New Post",
@@ -74,7 +74,7 @@ const data = {
         },
         {
           title: "Authors",
-          url: "#",
+          url: "dashboard/all-aurthors",
         },
       ],
     },
@@ -82,12 +82,12 @@ const data = {
   projects: [
     {
       name: "Overview",
-      url: "#",
+      url: "/dashboard",
       icon: Frame,
     },
     {
       name: "Profile",
-      url: "#",
+      url: "/profile",
       icon: Frame,
     },
   ],

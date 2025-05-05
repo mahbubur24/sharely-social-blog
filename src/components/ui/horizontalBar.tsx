@@ -4,12 +4,21 @@ import { menuItems } from "@/static/navmenuItems";
 import Link from "next/link";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import SearchBar from "../shared/SearchBar";
+import MultiFilter from "../shared/Filter";
 
 export default function HorizontalBar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const handleSearch = (query: string) => {
+    console.log("Search for:", query);
+    // Route to search page or filter list, etc.
+  };
+  const handleFilterChange = (selected: Record<string, string[]>) => {
+    console.log("Selected filters:", selected);
+    // API CALL
+  };
   return (
-    <nav className="bg-[#fdfcf8] px-6 py-4">
+    <nav className="bg-[#fdfcf8] px-6 py-4 h-auto">
       {/* Top: Logo and Hamburger (Mobile) */}
       <div className="flex justify-between items-center md:hidden">
         {/* Logo */}
@@ -48,6 +57,12 @@ export default function HorizontalBar() {
             </Link>
           </li>
         ))}
+        <SearchBar onSearch={handleSearch} />
+        <div className="mt-2 md:mt-0">
+          <MultiFilter
+            onChange={(selected) => handleFilterChange({ category: selected })}
+          />
+        </div>
       </ul>
     </nav>
   );
