@@ -1,16 +1,16 @@
 import express from "express";
 import {
-  deleteUser,
   loginUser,
+  logoutUser,
   registerUser,
-  updateUser,
+  verifyOTP,
 } from "../controllers/authControllers";
 
 const router = express.Router();
 
 router.post("/registerUser", registerUser);
+router.post("/verifyOTP", verifyOTP);
 router.post("/loginUser", loginUser);
-router.put("/updateUser", updateUser);
-router.delete("/deleteUser", deleteUser);
+router.post("/logoutUser", logoutUser);
 
 export default router;

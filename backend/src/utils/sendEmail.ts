@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 
+import apiError from "../error/apiError";
+
 export const sendEmail = async (
   email: string,
   subject: string,
@@ -27,6 +29,6 @@ export const sendEmail = async (
     await transporter.sendMail(mailOptions);
   } catch (error: any) {
     console.error("Error sending email: ", error.message);
-    throw new Error("Failed to send email.");
+    throw new apiError(201, "Failed to send email.");
   }
 };

@@ -1,4 +1,4 @@
-export default class ApiResponse<T> {
+export default class apiResponse<T> {
   statusCode: number;
   data: T;
   message: string;
