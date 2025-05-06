@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+:root {
+  --font-lexend: 'Lexend', sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+}
+
+body {
+  font-family: var(--font-lexend);
+}
+
+.badge {
+  padding: 1px;
+  background-color: #dc2626;
+  color: white;
+  border-radius: 0;
+  transition: background-color 0.3s;
+}
+
+.badge:hover {
+  background-color: #b91c1c;
+
+}
+
+input {
+  border-radius: 0;
+}
+
+input:focus,
+input:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-color: #9ca3af;
+}
+
+button {
+  cursor: pointer;
+}
