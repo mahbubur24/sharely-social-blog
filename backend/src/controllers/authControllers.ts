@@ -235,3 +235,19 @@ export const logoutUser = asyncHandler(
     });
   }
 );
+
+export const getUser = asyncHandler(async (req: Request, res: Response) => {
+  const user = res.locals.user;
+
+  if (!user) {
+    throw new apiError(401, "User not found");
+  }
+
+  const response = new apiResponse(200, user, "User fetched successfully");
+
+  res.status(response.statusCode).json({
+    success: response.success,
+    message: response.message,
+    data: response.data,
+  });
+});
