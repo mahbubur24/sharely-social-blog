@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import apiError from "../error/apiError";
 import apiResponse from "../error/apiResponse";
 import asyncHandler from "../error/asyncHandler";
+import { sendEmail } from "../utils/sendEmail";
 import { sendToken } from "../utils/sendToken";
 const prisma = new PrismaClient();
 
@@ -109,7 +110,7 @@ async function sendVerificationCode(
     const message = generateEmailTemplate(verificationCode);
 
     // Send the email using your email service
-    // await sendEmail(email, "Your Verification Code", message);
+    await sendEmail(email, "Your Verification Code", message);
 
     // No response is sent here, just handling the email sending logic
   } catch (error) {
