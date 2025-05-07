@@ -1,5 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import { NextFunction, Request, Response } from "express";
 import apiError from "../error/apiError";
 import apiResponse from "../error/apiResponse";
@@ -306,3 +307,40 @@ export const forgotPassword = asyncHandler(
     }
   }
 );
+
+export const resetPassword = asyncHandler(async (req, res, next) => {
+  const { token } = req.params;
+  const { password, confirmPassword } = req.body;
+
+  const hashedToken = crypto.createHash("sha512").update(token).digest("hex");
+
+  const user = await prisma.user.findFirst({
+    where: {
+      resetPasswordToken: hashedToken,
+      resetPasswordTokenExpires: {
+        gt: new Date(),
+      },
+    },
+  });
+
+  if (!user) {
+    throw new apiError(400, "Invalid or expired reset token.");
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    throw new apiError(400, "Passwords do not match.");
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Update user's password and clear reset token fields
+  const updatedUser = await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      password: hashedPassword,
+      resetPasswordToken: null,
+      resetPasswordTokenExpires: null,
+    },
+  });
+  sendToken(updatedUser, 200, "Password reset successful", res);
+});
