@@ -118,7 +118,6 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
-  role: 'role',
   active: 'active',
   accountVerified: 'accountVerified',
   verificationCode: 'verificationCode',
@@ -126,7 +125,8 @@ exports.Prisma.UserScalarFieldEnum = {
   resetPasswordToken: 'resetPasswordToken',
   resetPasswordTokenExpires: 'resetPasswordTokenExpires',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  postIds: 'postIds'
 };
 
 exports.Prisma.ProfileScalarFieldEnum = {
@@ -135,6 +135,14 @@ exports.Prisma.ProfileScalarFieldEnum = {
   phone: 'phone',
   bio: 'bio',
   gender: 'gender'
+};
+
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  slug: 'slug',
+  categories: 'categories'
 };
 
 exports.Prisma.SortOrder = {
@@ -146,14 +154,12 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-exports.Role = exports.$Enums.Role = {
-  ADMIN: 'ADMIN',
-  SUPERADMIN: 'SUPERADMIN'
-};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Profile: 'Profile'
+  Profile: 'Profile',
+  Post: 'Post'
 };
 
 /**

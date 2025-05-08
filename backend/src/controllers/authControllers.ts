@@ -1,14 +1,14 @@
-import { PrismaClient, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { NextFunction, Request, Response } from "express";
 import apiError from "../error/apiError";
 import apiResponse from "../error/apiResponse";
 import asyncHandler from "../error/asyncHandler";
+import { User } from "../generated/prisma"; // type
+import { prisma } from "../prisma-client/prisma"; // methode
 import { generateResetPasswordToken } from "../utils/generateResetToken";
 import { sendEmail } from "../utils/sendEmail";
 import { sendToken } from "../utils/sendToken";
-const prisma = new PrismaClient();
 
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {
